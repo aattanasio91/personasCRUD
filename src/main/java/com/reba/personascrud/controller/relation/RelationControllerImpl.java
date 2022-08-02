@@ -1,6 +1,5 @@
 package com.reba.personascrud.controller.relation;
 
-import com.reba.personascrud.model.relation.Relation;
 import com.reba.personascrud.model.relation.request.RelationRequest;
 import com.reba.personascrud.service.relation.RelationService;
 import org.springframework.beans.factory.annotation.Autowired;
