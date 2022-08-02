@@ -1,6 +1,7 @@
-package com.reba.personascrud.service;
+package com.reba.personascrud.service.person;
 
-import com.reba.personascrud.dao.PersonDao;
+import com.reba.personascrud.dao.person.PersonDao;
+import com.reba.personascrud.dao.relation.RelationDao;
 import com.reba.personascrud.model.persona.Person;
 import com.reba.personascrud.model.persona.request.PersonRequest;
 import org.springframework.beans.factory.annotation.Autowired;

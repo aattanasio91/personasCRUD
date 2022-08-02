@@ -1,4 +1,4 @@
-package com.reba.personascrud.service;
+package com.reba.personascrud.service.person;
 
 import com.reba.personascrud.model.persona.Person;
 import com.reba.personascrud.model.persona.request.PersonRequest;
@@ -9,4 +9,6 @@ public interface PersonService {
     void newPerson(PersonRequest personRequest);
 
     Optional<Person> getPersonById(Integer id);
+
+
 }

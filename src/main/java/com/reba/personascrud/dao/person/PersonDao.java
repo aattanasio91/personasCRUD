@@ -1,4 +1,4 @@
-package com.reba.personascrud.dao;
+package com.reba.personascrud.dao.person;
 
 import com.reba.personascrud.model.persona.Person;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,8 +1,11 @@
-package com.reba.personascrud.controller;
+package com.reba.personascrud.controller.person;
 
 import com.reba.personascrud.model.persona.Person;
 import com.reba.personascrud.model.persona.request.PersonRequest;
-import com.reba.personascrud.service.PersonService;
+import com.reba.personascrud.model.relation.Relation;
+import com.reba.personascrud.model.relation.request.RelationRequest;
+import com.reba.personascrud.service.person.PersonService;
+import com.reba.personascrud.service.relation.RelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +17,10 @@ import java.util.Optional;
 public class PersonControllerImpl implements PersonController {
 
     @Autowired private PersonService personService;
+    @Autowired private RelationService relationService;
 
     @Override
-    @RequestMapping (value = "/newPerson", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping (value = "/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<Boolean> newPerson(@RequestBody PersonRequest personRequest) {
         personService.newPerson(personRequest);
         return new ResponseEntity<>(Boolean.TRUE, HttpStatus.CREATED);
@@ -31,5 +35,16 @@ public class PersonControllerImpl implements PersonController {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    @PostMapping(value = "/{id1}/father/{id2}")
+    public boolean isTheFatherOf(@PathVariable Integer id1, @PathVariable Integer id2) {
+        try {
+            return relationService.isTheFatherOf(id1, id2);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }
