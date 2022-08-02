@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PersonasCrudApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(PersonasCrudApplication.class, args);
+
     }
 
 }

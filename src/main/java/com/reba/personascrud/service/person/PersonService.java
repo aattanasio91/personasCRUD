@@ -10,5 +10,6 @@ public interface PersonService {
 
     Optional<Person> getPersonById(Integer id);
 
+    String fatherOf(Integer id1, Integer id2);
 
 }

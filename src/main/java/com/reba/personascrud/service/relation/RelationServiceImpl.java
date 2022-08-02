@@ -12,10 +12,6 @@ public class RelationServiceImpl implements RelationService{
     @Autowired
     private RelationDao relationDao;
 
-    public boolean isTheFatherOf(Integer id1, Integer id2){
-        return (relationDao.getRelation(id1, id2).equals("FATHER") || relationDao.getRelation(id1, id2).equals("MOTHER"));
-    }
-
     @Override
     public String newRelation(RelationRequest relationRequest) {
 

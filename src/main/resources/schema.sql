@@ -1,0 +1,36 @@
+DROP TABLE IF EXISTS public.person;
+DROP TABLE IF EXISTS public.relation;
+DROP TABLE IF EXISTS public.relation_type;
+DROP TABLE IF EXISTS public.country;
+
+CREATE TABLE public.person (
+    id serial4 NOT NULL,
+    birth_date date NULL,
+    country varchar(255) NULL,
+    doc_number varchar(255) NULL,
+    doc_type varchar(255) NULL,
+    email varchar(255) NULL,
+    last_name varchar(255) NULL,
+    "name" varchar(255) NULL,
+    phone_number varchar(255) NULL,
+    CONSTRAINT person_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.relation (
+     id serial4 NOT NULL,
+     id_person1 int4 NULL,
+     id_person2 int4 NULL,
+     relation varchar(255) NULL,
+     CONSTRAINT relation_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.relation_type (
+    id serial4 NOT NULL,
+    relation_type varchar(255) NULL,
+    CONSTRAINT relation_type_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE country (
+     id serial4 NOT NULL,
+     name varchar(80)
+);

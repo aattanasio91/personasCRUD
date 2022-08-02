@@ -1,7 +1,6 @@
 package com.reba.personascrud.service.person;
 
 import com.reba.personascrud.dao.person.PersonDao;
-import com.reba.personascrud.dao.relation.RelationDao;
 import com.reba.personascrud.model.persona.Person;
 import com.reba.personascrud.model.persona.request.PersonRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +44,7 @@ public class PersonServiceImpl implements PersonService {
         return personDao.findById(id);
     }
 
+
     public List<Person> getPersonByProperties(String docType, String docNumber, String country){
         return personDao.findPersonByDocTypeNumberAndCountry(docType, docNumber, country);
     }
@@ -61,6 +61,18 @@ public class PersonServiceImpl implements PersonService {
     private boolean isLegalAge(Person person){
         Period period = Period.between(person.getBirthDate(), LocalDate.now());
         return period.getYears() >= 18;
+    }
+
+    @Override
+    public String fatherOf(Integer id1, Integer id2) {
+        Optional<Person> person1 = personDao.findById(id1);
+        Optional<Person> person2 = personDao.findById(id2);
+        if (person1 != null && person2 != null){
+            return String.format("%s es el padre de %s", person1.get().getName(), person2.get().getName());
+        }else{
+            return "No es su padre";
+        }
+
     }
 
 }
