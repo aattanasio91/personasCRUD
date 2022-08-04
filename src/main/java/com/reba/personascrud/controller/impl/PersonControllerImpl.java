@@ -20,7 +20,12 @@ public class PersonControllerImpl implements PersonController {
     @RequestMapping (value = "/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<Person> newPerson(@RequestBody PersonRequest personRequest) {
         Person newPerson = personService.newPerson(personRequest);
-        return new ResponseEntity<>(newPerson, HttpStatus.CREATED);
+        if(newPerson!= null){
+            return new ResponseEntity<>(newPerson, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.reba.personascrud.model.Person;
 import com.reba.personascrud.model.request.PersonRequest;
 import com.reba.personascrud.service.CountryService;
 import com.reba.personascrud.service.PersonService;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,15 +32,20 @@ public class PersonServiceImpl implements PersonService {
         newPerson.setDocNumber(personRequest.getDocNumber());
         newPerson.setCountry(countryService.getByName(personRequest.getCountry().getName()));
         newPerson.setPhoneNumber(personRequest.getPhoneNumber());
-
-        this.persistNewPerson(newPerson);
-
-        return newPerson;
+        try {
+            return this.persistNewPerson(newPerson);
+        }catch (ServiceException se){
+            se.printStackTrace();
+        }
+        return null;
     }
 
-    private void persistNewPerson(Person newPerson){
+    private Person persistNewPerson(Person newPerson){
         if(haveAtLeastOneContact(newPerson) && isLegalAge(newPerson) && !personExists(newPerson.getDocType(), newPerson.getDocNumber(), newPerson.getCountry().getName())){
-            personDao.save(newPerson);
+            Person persistedPerson = personDao.save(newPerson);
+            return persistedPerson;
+        }else{
+            return null;
         }
     }
 
