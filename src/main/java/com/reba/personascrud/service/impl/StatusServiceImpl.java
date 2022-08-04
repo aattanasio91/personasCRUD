@@ -20,7 +20,7 @@ public class StatusServiceImpl implements StatusService {
 
     public List<Map<String, String>> getStats(){
         List<Map<String, String>> statusList = new ArrayList<>();
-        Query query = em.createNativeQuery("SELECT c.name, round((( count(*)*100.00) / (select COUNT(*) from person)), 2) as cantidad FROM public.country c inner join public.person p on p.country_id = c.id group by c.id, c.name");
+        Query query = em.createNativeQuery("SELECT c.name, round((( count(*)*100.00) / (select COUNT(*) from person)), 2) as cantidad FROM country c inner join person p on p.country_id = c.id group by c.id, c.name");
         List<Object[]> resultList = query.getResultList();
         for (Object[] status : resultList){
             Map<String, String> statusMap = new HashMap<>();
