@@ -1,6 +1,6 @@
-package com.reba.personascrud.service.relation;
+package com.reba.personascrud.service;
 
-import com.reba.personascrud.model.relation.request.RelationRequest;
+import com.reba.personascrud.model.request.RelationRequest;
 
 public interface RelationService {
 

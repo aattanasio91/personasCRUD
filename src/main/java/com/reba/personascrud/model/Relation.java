@@ -1,4 +1,4 @@
-package com.reba.personascrud.model.relation;
+package com.reba.personascrud.model;
 
 import javax.persistence.*;
 
@@ -11,15 +11,16 @@ public class Relation {
     private Integer id;
 
     @Column(name = "id_person1")
-    private Integer idPerson1;
+    private int idPerson1;
 
-    @Column(name = "id_person2")
-    private Integer idPerson2;
+   @Column(name = "id_person2")
+    private int idPerson2;
 
-    @Column(name = "relation")
-    private String relation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "relation_type_id", foreignKey = @ForeignKey(name = "FK_RELATION_RELATION_TYPE"))
+    private RelationType relation;
 
-    public Relation(Integer id, Integer idPerson1, Integer idPerson2, String relation) {
+    public Relation(Integer id, int idPerson1, int idPerson2, RelationType relation) {
         this.id = id;
         this.idPerson1 = idPerson1;
         this.idPerson2 = idPerson2;
@@ -37,27 +38,27 @@ public class Relation {
         this.id = id;
     }
 
-    public Integer getIdPerson1() {
+    public int getIdPerson1() {
         return idPerson1;
     }
 
-    public void setIdPerson1(Integer idPerson1) {
+    public void setIdPerson1(int idPerson1) {
         this.idPerson1 = idPerson1;
     }
 
-    public Integer getIdPerson2() {
+    public int getIdPerson2() {
         return idPerson2;
     }
 
-    public void setIdPerson2(Integer idPerson2) {
+    public void setIdPerson2(int idPerson2) {
         this.idPerson2 = idPerson2;
     }
 
-    public String getRelation() {
+    public RelationType getRelation() {
         return relation;
     }
 
-    public void setRelation(String relation) {
+    public void setRelation(RelationType relation) {
         this.relation = relation;
     }
 }

@@ -1,9 +1,10 @@
-package com.reba.personascrud.model.persona.request;
+package com.reba.personascrud.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.reba.personascrud.model.Country;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "lastName", "birthDate", "docType", "docNumber", "country", "phoneNumber", "email"})
@@ -21,13 +22,13 @@ public class PersonRequest {
     @JsonProperty("docNumber")
     private String docNumber;
     @JsonProperty("country")
-    private String country;
+    private Country country;
     @JsonProperty("phoneNumber")
     private String phoneNumber;
     @JsonProperty("email")
     private String email;
 
-    public PersonRequest(String name, String lastName, String birthDate, String docType, String docNumber, String country, String phoneNumber, String email) {
+    public PersonRequest(String name, String lastName, String birthDate, String docType, String docNumber, Country country, String phoneNumber, String email) {
         this.name = name;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -91,12 +92,12 @@ public class PersonRequest {
     }
 
     @JsonProperty("country")
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
     @JsonProperty("country")
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 

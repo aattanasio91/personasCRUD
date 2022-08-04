@@ -1,9 +1,9 @@
-package com.reba.personascrud.controller.person;
+package com.reba.personascrud.controller.impl;
 
-import com.reba.personascrud.model.persona.Person;
-import com.reba.personascrud.model.persona.request.PersonRequest;
-import com.reba.personascrud.service.person.PersonService;
-import com.reba.personascrud.service.relation.RelationService;
+import com.reba.personascrud.controller.PersonController;
+import com.reba.personascrud.model.Person;
+import com.reba.personascrud.model.request.PersonRequest;
+import com.reba.personascrud.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,9 @@ public class PersonControllerImpl implements PersonController {
 
     @Override
     @RequestMapping (value = "/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Boolean> newPerson(@RequestBody PersonRequest personRequest) {
-        personService.newPerson(personRequest);
-        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.CREATED);
+    public ResponseEntity<Person> newPerson(@RequestBody PersonRequest personRequest) {
+        Person newPerson = personService.newPerson(personRequest);
+        return new ResponseEntity<>(newPerson, HttpStatus.CREATED);
     }
 
     @Override

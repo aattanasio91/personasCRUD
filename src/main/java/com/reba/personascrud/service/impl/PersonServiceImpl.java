@@ -1,23 +1,25 @@
-package com.reba.personascrud.service.person;
+package com.reba.personascrud.service.impl;
 
-import com.reba.personascrud.dao.person.PersonDao;
-import com.reba.personascrud.model.persona.Person;
-import com.reba.personascrud.model.persona.request.PersonRequest;
+import com.reba.personascrud.dao.PersonDao;
+import com.reba.personascrud.model.Person;
+import com.reba.personascrud.model.request.PersonRequest;
+import com.reba.personascrud.service.CountryService;
+import com.reba.personascrud.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PersonServiceImpl implements PersonService {
 
     @Autowired private PersonDao personDao;
+    @Autowired private CountryService countryService;
 
-    public void newPerson(PersonRequest personRequest){
+    public Person newPerson(PersonRequest personRequest){
 
         Person newPerson = new Person();
 
@@ -27,15 +29,16 @@ public class PersonServiceImpl implements PersonService {
         newPerson.setEmail(personRequest.getEmail());
         newPerson.setDocType(personRequest.getDocType());
         newPerson.setDocNumber(personRequest.getDocNumber());
-        newPerson.setCountry(personRequest.getCountry());
+        newPerson.setCountry(countryService.getByName(personRequest.getCountry().getName()));
         newPerson.setPhoneNumber(personRequest.getPhoneNumber());
 
         this.persistNewPerson(newPerson);
 
+        return newPerson;
     }
 
     private void persistNewPerson(Person newPerson){
-        if(haveAtLeastOneContact(newPerson) && isLegalAge(newPerson) && !personExists(newPerson.getDocType(), newPerson.getDocNumber(), newPerson.getCountry())){
+        if(haveAtLeastOneContact(newPerson) && isLegalAge(newPerson) && !personExists(newPerson.getDocType(), newPerson.getDocNumber(), newPerson.getCountry().getName())){
             personDao.save(newPerson);
         }
     }
@@ -67,12 +70,11 @@ public class PersonServiceImpl implements PersonService {
     public String fatherOf(Integer id1, Integer id2) {
         Optional<Person> person1 = personDao.findById(id1);
         Optional<Person> person2 = personDao.findById(id2);
-        if (person1 != null && person2 != null){
+        if (person1.isPresent() && person2.isPresent()){
             return String.format("%s es el padre de %s", person1.get().getName(), person2.get().getName());
         }else{
             return "No es su padre";
         }
 
     }
-
 }

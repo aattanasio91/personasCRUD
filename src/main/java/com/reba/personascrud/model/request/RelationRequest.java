@@ -1,50 +1,52 @@
-package com.reba.personascrud.model.relation.request;
+package com.reba.personascrud.model.request;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.reba.personascrud.model.Person;
+import com.reba.personascrud.model.RelationType;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "idPerson1", "idPerson2", "relation"})
 public class RelationRequest {
 
     @JsonProperty("idPerson1")
-    private Integer idPerson1;
+    private int idPerson1;
 
     @JsonProperty("idPerson2")
-    private Integer idPerson2;
+    private int idPerson2;
 
     @JsonProperty("relation")
-    private String relation;
+    private RelationType relation;
 
-    public RelationRequest(Integer idPerson1, Integer idPerson2, String relation) {
+    public RelationRequest(int idPerson1, int idPerson2, RelationType relation) {
         this.idPerson1 = idPerson1;
         this.idPerson2 = idPerson2;
         this.relation = relation;
     }
 
-    public Integer getIdPerson1() {
+    public int getIdPerson1() {
         return idPerson1;
     }
 
-    public void setIdPerson1(Integer idPerson1) {
+    public void setIdPerson1(int idPerson1) {
         this.idPerson1 = idPerson1;
     }
 
-    public Integer getIdPerson2() {
+    public int getIdPerson2() {
         return idPerson2;
     }
 
-    public void setIdPerson2(Integer idPerson2) {
+    public void setIdPerson2(int idPerson2) {
         this.idPerson2 = idPerson2;
     }
 
-    public String getRelation() {
+    public RelationType getRelation() {
         return relation;
     }
 
-    public void setRelation(String relation) {
+    public void setRelation(RelationType relation) {
         this.relation = relation;
     }
 }

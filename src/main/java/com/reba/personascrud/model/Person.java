@@ -1,4 +1,4 @@
-package com.reba.personascrud.model.persona;
+package com.reba.personascrud.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,8 +26,9 @@ public class Person {
     @Column(name = "doc_number")
     private String docNumber;
 
-    @Column(name = "country")
-    private String country;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "FK_RELATION_RELATION_TYPE"))
+    private Country country;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -35,7 +36,7 @@ public class Person {
     @Column(name = "email")
     private String email;
 
-    public Person(String name, String lastName, LocalDate birthDate, String docType, String docNumber, String country, String phoneNumber, String email) {
+    public Person(String name, String lastName, LocalDate birthDate, String docType, String docNumber, Country country, String phoneNumber, String email) {
         this.name = name;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -96,11 +97,11 @@ public class Person {
         this.docNumber = docNumber;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 

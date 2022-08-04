@@ -1,9 +1,11 @@
-package com.reba.personascrud.model.relation;
+package com.reba.personascrud.model;
 
 import javax.persistence.*;
 
 @Entity
 public class RelationType {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
